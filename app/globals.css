@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  /* Lendscope institutional palette */
+  --ls-bg-deep: #020814;
+  --ls-bg: #070c16;
+  --ls-surface: #0b1521;
+  --ls-card: #0e1a28;
+  --ls-card-alt: #0a1420;
+  --ls-border: #162033;
+  --ls-border-lit: #1e3048;
+  --ls-accent: #1db67d;
+  --ls-accent-dim: #178f63;
+  --ls-accent-glow: rgba(29, 182, 125, 0.15);
+  --ls-text: #e2eaf2;
+  --ls-text-sec: #8a9db5;
+  --ls-text-muted: #566a80;
+  --ls-cyan: #3aafcf;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-ibm-plex-mono);
+
+  /* ─── Lendscope Dashboard semantic palette ───────────────────────────── */
+
+  /* Surfaces — layered dark backgrounds */
+  --color-surface-0: #020814;
+  --color-surface-1: #0c1522;
+  --color-surface-2: #0a1220;
+  --color-surface-3: #0d1826;
+  --color-surface-4: #0f1a2a;
+
+  /* Borders */
+  --color-border-base: #172a3f;
+  --color-border-muted: #11243a;
+
+  /* Text (brightest → faintest) */
+  --color-text-bright: #f3f7fc;
+  --color-text-base: #e7edf4;
+  --color-text-dim: #8a9db5;
+  --color-text-muted: #5b7088;
+  --color-text-faint: #3e5470;
+
+  /* Accents / status */
+  --color-accent: #1db67d;
+  --color-accent-soft: #25d28f;
+  --color-warn: #e5a93e;
+  --color-danger: #e5534b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--ls-bg-deep);
+  color: var(--foreground);
+  font-family:
+    var(--font-dm-sans),
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+/* ─── Global Typography System ────────────────────────────────────────────── */
+
+.font-num {
+  font-family:
+    var(--font-ibm-plex-mono), "SF Mono", "Fira Code", "Cascadia Code",
+    monospace;
+  font-feature-settings:
+    "tnum" 1,
+    "ss01" 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.font-ui {
+  font-family:
+    var(--font-dm-sans),
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+/* Subtle single-fire pulse for selection feedback — no neon */
+@keyframes lendscope-select-pulse {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(29, 182, 125, 0.18),
+      0 0 0 1px rgba(29, 182, 125, 0.3);
+  }
+  70% {
+    box-shadow:
+      0 0 0 6px rgba(29, 182, 125, 0),
+      0 0 0 1px rgba(29, 182, 125, 0.3);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(29, 182, 125, 0),
+      0 0 0 1px rgba(29, 182, 125, 0.18);
+  }
+}
+
+.lendscope-select-pulse {
+  animation: lendscope-select-pulse 800ms ease-out 1;
+}
+
+/* ─── Sidebar nav item — CSS-only hover (no JS state) ─────────────────────── */
+
+.sb-nav {
+  background: transparent;
+  border: 1px solid transparent;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease;
+}
+.sb-nav:hover {
+  background: rgba(255, 255, 255, 0.025);
+  border-color: rgba(255, 255, 255, 0.04);
+}
+.sb-nav .sb-icon {
+  color: #5e7389;
+  transition: color 180ms ease;
+}
+.sb-nav:hover .sb-icon {
+  color: #a4b6cc;
+}
+.sb-nav .sb-label {
+  color: #6b7c90;
+  transition: color 180ms ease;
+}
+.sb-nav:hover .sb-label {
+  color: #c0cdd9;
+}
+
+.sb-proto {
+  background: transparent;
+  border: 1px solid transparent;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+.sb-proto:hover {
+  background: rgba(255, 255, 255, 0.025);
+  border-color: rgba(255, 255, 255, 0.04);
+  transform: translateY(-1px);
+}
+.sb-proto .sb-proto-label {
+  color: #7a90a8;
+  transition: color 180ms ease;
+}
+.sb-proto:hover .sb-proto-label {
+  color: #c0cdd9;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+  margin: 8px 0;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.28) rgba(255, 255, 255, 0.03);
+}
