@@ -53,7 +53,7 @@ When JupLend launched, millions of dollars in borrows migrated manually. That al
 
 ## Demo
 
-[![Watch the demo](docs/demo-thumbnail.png)](https://www.youtube.com/watch?v=7zqdymrpvk8)
+▶️ [Watch the demo](https://youtu.be/yCbxgxwMYOQ)
 
 ## How it works
 
@@ -69,6 +69,54 @@ yield, liquidation buffer cost, and a protocol risk score, surfacing the actual 
   - Live: Kamino, Save, JupLend
   - Integration complete, awaiting protocol resumption: Drift
   - Coming soon: Marginfi
+
+## Getting Started
+
+Arvexa runs against **Solana mainnet** — it reads live on-chain positions directly from Kamino, Save, and JupLend, so there is no devnet or mock mode. Browsing the dashboard and connecting a wallet is fully **read-only and requires no funds**; only executing a refinance, repay, or new position signs a real mainnet transaction.
+
+### Prerequisites
+
+- **Node.js** 20 or newer
+- **pnpm** 9+ — `npm install -g pnpm`
+- A **Solana mainnet RPC URL** and a **Helius API key** (both available on the free tier at [helius.dev](https://helius.dev))
+
+### 1. Clone and install
+
+```bash
+git clone https://github.com/<your-username>/lendscope.git
+cd lendscope
+pnpm install
+```
+
+### 2. Configure environment
+
+Copy the example file and fill in your own values:
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Required | Description |
+| --- | --- | --- |
+| `RPC_URL` | ✅ | Server-side Solana **mainnet** RPC URL used to read protocol accounts. A Helius mainnet URL works well. |
+| `HELIUS_API_KEY` | ✅ | Helius API key, used to fetch wallet transaction history. |
+| `NEXT_PUBLIC_SOLANA_RPC_URL` | optional | Client-side RPC for the wallet adapter. Defaults to the public `mainnet-beta` endpoint (heavily rate-limited) — set your own for reliability. |
+| `NEXT_PUBLIC_API_BASE_URL` | optional | Base URL for the API routes. Leave empty for local development (same-origin). |
+
+### 3. Run the dev server
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) and connect a Solana wallet to view your positions.
+
+### Production build
+
+```bash
+pnpm build
+pnpm start
+```
 
 ## Roadmap
 
